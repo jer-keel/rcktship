@@ -1,2 +1,12 @@
 src/
 node_modules/
+config.json
+.DS_Store
+.vscode
+
+# Dependency directory
+# https://docs.npmjs.com/cli/shrinkwrap#caveats
+node_modules
+
+# Debug log from npm
+npm-debug.log
