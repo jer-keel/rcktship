@@ -7,7 +7,9 @@
     "clean": "./node_modules/.bin/rimraf dist",
     "build-ts": "./node_modules/.bin/tsc --pretty",
     "watch-ts": "./node_modules/.bin/tsc --watch --pretty",
-    "test": "./node_modules/.bin/jest && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "test": "./node_modules/.bin/jest",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "travis-test": "npm run test && npm run coveralls"
   },
   "main": "index.js",
   "bin": {
