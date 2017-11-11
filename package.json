@@ -7,8 +7,7 @@
     "clean": "./node_modules/.bin/rimraf dist",
     "build-ts": "./node_modules/.bin/tsc --pretty",
     "watch-ts": "./node_modules/.bin/tsc --watch --pretty",
-    "test": "./node_modules/.bin/jest",
-    "publish": "npm run clean && npm run build-ts && npm publish"
+    "test": "./node_modules/.bin/jest"
   },
   "main": "index.js",
   "bin": {
