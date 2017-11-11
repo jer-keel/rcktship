@@ -2,16 +2,19 @@
 
 const Liftoff   = require('liftoff');
 const v8flags   = require('v8flags');
+const path      = require('path');
 const interpret = require('interpret');
 const nopt      = require('nopt');
 const cliPack   = require('../package.json');
 
 const knownOptions = {
+  'config': path,
   'version': Boolean,
   'help': Boolean,
 };
 
 const shortHands = {
+  'c': ['--config'],
   'v': ['--version'],
   'h': ['--help'],
 };
@@ -57,6 +60,9 @@ const cli = new Liftoff({
 
 function invoke(env) {
   process.chdir(env.configBase);
+
+  if (options.config) env.configPath = options.config;
+
   require(env.configPath);
   const rcktship = require(env.modulePath);
   rcktship.liftoff(target, mission).catch((err) => console.error(err));

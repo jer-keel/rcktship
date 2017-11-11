@@ -10,6 +10,7 @@ import { RemoteCommand } from './commands/RemoteCommand';
 class Rocket {
   cmds: AbstractCommand[] = [];
   conn: Client;
+  currentTarget: string;
   targets: { [target: string]: ConnectConfig } = {};
   missions: { [name: string]: Function } = {};
 
@@ -52,8 +53,10 @@ class Rocket {
                       `${colors.redBright('was not found!')}`);
     }
 
-    this.missions[mission]();
     const targetConfig = this.targets[target];
+    this.currentTarget = target;
+    this.missions[mission]();
+
     if (targetConfig) {
       this.conn = new Client();
       this.conn.on('ready', async () => {
