@@ -30,7 +30,7 @@ You **must** provide a target for your rocket, but you do not have to provide a 
 
 ## Sample `rcktship.js` file
 
-```
+```javascript
 const rocket = require('rcktship');
 const config = require('./config.json');
 
@@ -45,6 +45,15 @@ rocket.mission('pwd', () => {
   rocket.local('pwd');
   rocket.remote('pwd');
 });
+```
+
+To run the above missions:
+```bash
+# Run default task
+$ rocket prod
+
+# Run pwd task
+$ rocket prod pwd
 ```
 
 ## Development
