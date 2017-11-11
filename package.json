@@ -7,7 +7,7 @@
     "clean": "./node_modules/.bin/rimraf dist",
     "build-ts": "./node_modules/.bin/tsc --pretty",
     "watch-ts": "./node_modules/.bin/tsc --watch --pretty",
-    "test": "./node_modules/.bin/jest"
+    "test": "./node_modules/.bin/jest && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "main": "index.js",
   "bin": {
@@ -56,6 +56,7 @@
     "@types/jest": "^21.1.6",
     "@types/node": "^8.0.47",
     "@types/ssh2": "^0.5.35",
+    "coveralls": "^3.0.0",
     "jest": "^21.2.1",
     "rimraf": "^2.6.2",
     "ts-jest": "^21.2.1",
