@@ -1,5 +1,7 @@
 # rcktship 🚀
 
+[![Version](https://img.shields.io/npm/v/rcktship.svg)](https://www.npmjs.com/package/rcktship)  [![downloads](https://img.shields.io/npm/dm/rcktship.svg)](https://www.npmjs.com/package/rcktship) [![Build Status](https://travis-ci.org/jerkeeler/rcktship.svg?branch=master)](https://travis-ci.org/jerkeeler/rcktship) [![Coverage Status](https://coveralls.io/repos/github/jerkeeler/rcktship/badge.svg?branch=master)](https://coveralls.io/github/jerkeeler/rcktship?branch=master) [![dependencies](https://david-dm.org/jerkeeler/rcktship.svg)](https://www.npmjs.com/package/rcktship)
+
 Rcktship is a lightweight [node.js](https://nodejs.org/) library used for easily running a series of commands on both your local machine and remote hosts. This is an ideal library for small scale deployments.
 
 Rcktship is heavily inspired by [Fabric](http://www.fabfile.org/), which is also a remote command runner written in Python.
