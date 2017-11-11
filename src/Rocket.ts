@@ -11,6 +11,7 @@ class Rocket {
   cmds: AbstractCommand[] = [];
   conn: Client;
   targets: { [target: string]: ConnectConfig } = {};
+  missions: { [name: string]: Function } = {};
 
   target(target: string, rocketConfig: ConnectConfig) {
     if (rocketConfig && rocketConfig.privateKey)
@@ -28,7 +29,30 @@ class Rocket {
     this.addToQueue(localCmd);
   }
 
-  async liftoff(target: string) {
+  mission(name: string, callback: Function) {
+    this.missions[name] = callback;
+  }
+
+  reset() {
+    this.cmds = [];
+    this.missions = {};
+    this.targets = {};
+  }
+
+  async liftoff(target: string, mission = 'default') {
+    if (!this.missions[mission]) {
+      throw new Error(`${colors.redBright('Mission')}` +
+                      ` ${colors.greenBright.bold(`${mission}`)} ` +
+                      `${colors.redBright('was not found!')}`);
+    }
+
+    if (!this.targets[target] && target !== 'local') {
+      throw new Error(`${colors.redBright('Target')}` +
+                      ` ${colors.greenBright.bold(`${target}`)} ` +
+                      `${colors.redBright('was not found!')}`);
+    }
+
+    this.missions[mission]();
     const targetConfig = this.targets[target];
     if (targetConfig) {
       this.conn = new Client();
@@ -41,6 +65,8 @@ class Rocket {
     } else {
       await this.runCmds();
     }
+
+    return 'success';
   }
 
   private addToQueue(cmd: AbstractCommand) {

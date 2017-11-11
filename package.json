@@ -7,7 +7,7 @@
     "clean": "./node_modules/.bin/rimraf dist",
     "build-ts": "./node_modules/.bin/tsc --pretty",
     "watch-ts": "./node_modules/.bin/tsc --watch --pretty",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/jest"
   },
   "main": "index.js",
   "bin": {
@@ -41,7 +41,6 @@
   "homepage": "https://github.com/jerkeeler/rcktship#readme",
   "dependencies": {
     "chalk": "^2.3.0",
-    "commander": "^2.11.0",
     "debug": "^3.1.0",
     "inquirer": "^3.3.0",
     "interpret": "^1.0.4",
@@ -54,10 +53,27 @@
     "@types/commander": "^2.11.0",
     "@types/debug": "0.0.30",
     "@types/inquirer": "0.0.35",
+    "@types/jest": "^21.1.6",
     "@types/node": "^8.0.47",
     "@types/ssh2": "^0.5.35",
+    "jest": "^21.2.1",
     "rimraf": "^2.6.2",
+    "ts-jest": "^21.2.1",
     "tslint": "^5.8.0",
     "typescript": "^2.6.1"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ]
   }
 }

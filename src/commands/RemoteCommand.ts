@@ -7,7 +7,7 @@ class RemoteCommand extends AbstractCommand {
     return new Promise((resolve, reject) => {
       conn.exec(this.cmd, (err, stream) => {
         stream
-          .on('close', () => resolve())
+          .on('close', () => resolve('success'))
           .on('data', this.onData)
           .stderr.on('data', this.onError);
       });

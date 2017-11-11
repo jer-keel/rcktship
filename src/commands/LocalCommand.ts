@@ -11,7 +11,7 @@ class LocalCommand extends AbstractCommand {
 
       cmdOut.stdout.on('data', this.onData);
       cmdOut.stderr.on('data', this.onError);
-      cmdOut.on('close', resolve);
+      cmdOut.on('close', () => resolve('success'));
     });
   }
 }
