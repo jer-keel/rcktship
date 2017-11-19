@@ -1,7 +1,8 @@
 const rocket = require('./index');
 const config = require('./config.json');
 
-rocket.target('prod', config.connection);
+rocket.target('prod', [config.connection]);
+rocket.target('prod2', [config.connection, config.connection])
 
 rocket.mission('default', () => {
   console.log('Default mission!');
@@ -10,6 +11,16 @@ rocket.mission('default', () => {
 });
 
 rocket.mission('pwd', () => {
-  rocket.local('pwd');
+  rocket.remote('pwd');
+  rocket.remote('hostname');
+});
+
+rocket.mission('with', () => {
+  rocket.with('cd /app', () => {
+    rocket.with('cd /', () => {
+      rocket.remote('pwd');
+    })
+    rocket.remote('pwd');
+  });
   rocket.remote('pwd');
 });

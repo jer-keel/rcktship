@@ -58,13 +58,13 @@ const cli = new Liftoff({
   v8flags: v8flags,
 });
 
-function invoke(env) {
+async function invoke(env) {
   process.chdir(env.configBase);
 
   if (options.config) env.configPath = options.config;
 
   require(env.configPath);
-  const rcktship = require(env.modulePath);
+  const rcktship = await require(env.modulePath);
   rcktship.liftoff(target, mission).catch((err) => console.error(err));
 }
 

@@ -34,9 +34,14 @@ You **must** provide a target for your rocket, but you do not have to provide a 
 
 ```javascript
 const rocket = require('rcktship');
-const config = require('./config.json');
 
-rocket.target('prod', config.connection);
+rocket.target('prod', [{
+  "host": "foo@bar.buz",
+  "port": 22,
+  "username": "foobar",
+  "privateKey": "/Users/foobar",
+  "passphrase": "*****"
+}]);
 
 rocket.mission('default', () => {
   console.log('Default mission!');
@@ -57,6 +62,8 @@ $ rocket prod
 # Run pwd task
 $ rocket prod pwd
 ```
+
+Connection objects used for targets are ConnectConfig from [SSH2](https://github.com/mscdex/ssh2). Look there for any documentation on connection configurations.
 
 ## Development
 

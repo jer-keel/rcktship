@@ -1,24 +1,25 @@
-import { Rocket } from '../Rocket';
+import { RocketFactory } from '../RocketFactory';
 import * as chalk from 'chalk';
 
 const colors = chalk.default;
 
-const rocket = new Rocket();
+const rocketFactory = new RocketFactory();
+const rocket = rocketFactory.create();
 
 beforeEach(() => {
   rocket.reset();
 });
 
 test('Should add new local command to queue', () => {
-  expect(rocket.cmds).toHaveLength(0);
+  expect(rocket.commands).toHaveLength(0);
   rocket.local('pwd');
-  expect(rocket.cmds).toHaveLength(1);
+  expect(rocket.commands).toHaveLength(1);
 });
 
 test('Should add new remote command to queue', () => {
-  expect(rocket.cmds).toHaveLength(0);
+  expect(rocket.commands).toHaveLength(0);
   rocket.remote('pwd');
-  expect(rocket.cmds).toHaveLength(1);
+  expect(rocket.commands).toHaveLength(1);
 });
 
 test('Should add a new mission', async () => {
@@ -31,7 +32,7 @@ test('Should add a new mission', async () => {
 
 test('Should add a new target', () => {
   expect(rocket.targets['prod']).toBeUndefined();
-  rocket.target('prod', {});
+  rocket.target('prod', []);
   expect(rocket.targets['prod']).toBeDefined();
 });
 
@@ -42,7 +43,7 @@ test('Should run set of local commands', async () => {
   });
 
   const output = await rocket.liftoff('local');
-  expect(output).toEqual('success');
+  expect(output).toEqual(true);
 });
 
 test('Should throw error if target is not registered', async () => {
@@ -66,4 +67,12 @@ test('Should throw error if mission is not registered', async () => {
   } catch (err) {
     expect(err).toEqual(expected);
   }
+});
+
+test('Using with should add', () => {
+  expect(rocket.prependArgs).toHaveLength(0);
+  rocket.with('cd /test', () => {
+    expect(rocket.prependArgs).toHaveLength(1);
+  });
+  expect(rocket.prependArgs).toHaveLength(0);
 });
