@@ -1,5 +1,7 @@
+import { RocketFactory } from './RocketFactory';
 import { Rocket } from './Rocket';
 
-const rckt = new Rocket();
+const rocketFactory = new RocketFactory();
+const rckt: Rocket = rocketFactory.create();
 
 export { rckt };

@@ -3,6 +3,8 @@ node_modules/
 config.json
 .DS_Store
 .vscode
+__tests__/
+__mocks__/
 
 # Dependency directory
 # https://docs.npmjs.com/cli/shrinkwrap#caveats
