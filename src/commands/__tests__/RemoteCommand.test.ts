@@ -10,6 +10,6 @@ test('RemoteCommand should contain correct command', () => {
 
 test('RemoteCommand should execute safely', async () => {
   const cmd = new RemoteCommand('pwd');
-  const output = await cmd.execute(await connectionFactory.create({}));
-  expect(output).toEqual('success');
+  const output = await Promise.all(cmd.execute([await connectionFactory.create({})]));
+  output.forEach(promise => expect(promise).toBe('success'));
 });

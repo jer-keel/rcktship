@@ -10,16 +10,14 @@ beforeEach(() => {
   rocket.reset();
 });
 
-test('Should add new local command to queue', () => {
-  expect(rocket.commands).toHaveLength(0);
-  rocket.local('pwd');
-  expect(rocket.commands).toHaveLength(1);
+test('Should return new promise for local command', () => {
+  const promise = rocket.local('pwd');
+  expect(promise).not.toBe(null);
 });
 
 test('Should add new remote command to queue', () => {
-  expect(rocket.commands).toHaveLength(0);
-  rocket.remote('pwd');
-  expect(rocket.commands).toHaveLength(1);
+  const promise = rocket.remote('pwd');
+  expect(promise).not.toBe(null);
 });
 
 test('Should add a new mission', async () => {
@@ -69,9 +67,9 @@ test('Should throw error if mission is not registered', async () => {
   }
 });
 
-test('Using with should add', () => {
+test('Using with should prepend arguments', async () => {
   expect(rocket.prependArgs).toHaveLength(0);
-  rocket.with('cd /test', () => {
+  await rocket.with('cd /test', () => {
     expect(rocket.prependArgs).toHaveLength(1);
   });
   expect(rocket.prependArgs).toHaveLength(0);
