@@ -74,3 +74,11 @@ test('Using with should prepend arguments', async () => {
   });
   expect(rocket.prependArgs).toHaveLength(0);
 });
+
+test('JustOnce should flip once to true', async () => {
+  expect(rocket.once).toBe(false);
+  await rocket.justOnce(() => {
+    expect(rocket.once).toBe(true);
+  })
+  expect(rocket.once).toBe(false);
+});

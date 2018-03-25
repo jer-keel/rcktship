@@ -16,12 +16,12 @@ class Rocket {
   targets: { [target: string]: ConnectConfig[] } = {};
   missions: { [name: string]: Function } = {};
   prependArgs: string[] = [];
+  once: boolean = false;
 
   constructor(private connectionFactory: ConnectionFactory) { }
 
   /**
    * Add a new target that the rocket can use to execute commands on
-   *
    * @param target The name of the target
    * @param connectionConfigs Connections for each host this target should hit
    */
@@ -31,18 +31,16 @@ class Rocket {
 
   /**
    * Run a command on all remote hosts in the target
-   *
    * @param cmd Command to run remotely
    */
   remote(cmd: string) {
     cmd = this.composeCmd(cmd);
-    const remoteCmd = new RemoteCommand(cmd);
+    const remoteCmd = new RemoteCommand(cmd, this.once);
     return this.executeCommand(remoteCmd);
   }
 
   /**
    * Run a command locally, once
-   *
    * @param cmd Command to run locally
    */
   local(cmd: string) {
@@ -54,7 +52,6 @@ class Rocket {
   /**
    * Create a new mission with a particular name that executes a callback
    * containing javascript and commands to run
-   *
    * @param name Name of the mission
    * @param callback Function to call when executing a mission
    */
@@ -73,7 +70,6 @@ class Rocket {
 
   /**
    * Prepend all commands inside of a given callback with a given command
-   *
    * @param command Command to prepend to all commands executed in the callback
    * @param callback Callback containing commands to execute
    */
@@ -92,8 +88,25 @@ class Rocket {
   }
 
   /**
+   * Execute all commands only on one of the remote hosts
+   * @param callback Callback containing commands to execute
+   */
+  justOnce(callback: Function): Promise<any> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        this.once = true;
+        const results = await callback();
+        this.once = false;
+        resolve(results);
+      } catch (e) {
+        console.error(e);
+        reject(e);
+      }
+    });
+  }
+
+  /**
    * Make the rocket liftoff! And run all commands sequentially!
-   *
    * @param target Target to use when executing commands
    * @param mission Missions to run on the selected target, default is 'default'
    */

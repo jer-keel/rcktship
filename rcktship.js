@@ -25,3 +25,10 @@ rocket.mission('with', async () => {
   });
   await rocket.remote('pwd');
 });
+
+rocket.mission('once', async () => {
+  await rocket.remote('hostname');
+  await rocket.justOnce(async () => {
+    await rocket.remote('hostname')
+  });
+});
