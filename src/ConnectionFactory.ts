@@ -12,7 +12,7 @@ class ConnectionFactory {
       connection.on('ready', () => {
         resolve(connection);
       }).connect(config);
-    })
+    });
   }
 
   createAll(configs: ConnectConfig[]): Promise<Client[]> {

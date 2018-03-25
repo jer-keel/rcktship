@@ -2,25 +2,26 @@ const rocket = require('./index');
 const config = require('./config.json');
 
 rocket.target('prod', [config.connection]);
-rocket.target('prod2', [config.connection, config.connection])
+rocket.target('prod2', [config.connection, config.connection]);
 
-rocket.mission('default', () => {
+rocket.mission('default', async () => {
   console.log('Default mission!');
   console.log(`Current target: ${rocket.currentTarget}`);
-  rocket.remote('hostname');
+  await rocket.local('pwd');
+  await rocket.remote('hostname');
 });
 
-rocket.mission('pwd', () => {
-  rocket.remote('pwd');
-  rocket.remote('hostname');
+rocket.mission('pwd', async () => {
+  await rocket.local('pwd');
+  await rocket.remote('echo \'hello world!\'');
 });
 
-rocket.mission('with', () => {
-  rocket.with('cd /app', () => {
-    rocket.with('cd /', () => {
-      rocket.remote('pwd');
-    })
-    rocket.remote('pwd');
+rocket.mission('with', async () => {
+  await rocket.with('cd /app', async () => {
+    await rocket.with('cd /', async () => {
+      return rocket.remote('pwd');
+    });
+    return rocket.remote('pwd');
   });
-  rocket.remote('pwd');
+  await rocket.remote('pwd');
 });

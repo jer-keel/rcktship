@@ -5,10 +5,11 @@ const colors = chalk.default;
 abstract class AbstractCommand {
   constructor(readonly cmd: string) { }
 
-  protected abstract run(conn?: Client): Promise<{}>;
+  protected abstract run(conn: Client[]): Promise<{}>[];
 
-  execute(conn?: Client) {
-    console.log(colors.cyanBright.bold(`\nExecuting: ${this.cmd}`));
+  execute(conn: Client[]): Promise<{}>[] {
+    const now = new Date();
+    console.log(colors.cyanBright.bold(`\n${now} - Executing ${this.constructor.name}: ${this.cmd}`));
     return this.run(conn);
   }
 

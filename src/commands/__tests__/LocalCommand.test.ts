@@ -1,4 +1,7 @@
 import { LocalCommand } from '../LocalCommand';
+import { ConnectionFactory } from '../../ConnectionFactory';
+
+const connectionFactory = new ConnectionFactory();
 
 test('LocalCommand should contain correct command', () => {
   const cmd = new LocalCommand('pwd');
@@ -7,6 +10,6 @@ test('LocalCommand should contain correct command', () => {
 
 test('LocalCommand should execute pwd cleanly', async () => {
   const cmd = new LocalCommand('pwd');
-  const output = await cmd.execute();
-  expect(output).toEqual('success');
+  const output = await Promise.all(cmd.execute([await connectionFactory.create({})]));
+  output.forEach(out => expect(out).toEqual('success'));
 });
