@@ -37,7 +37,7 @@ class Rocket {
   remote(cmd: string) {
     cmd = this.composeCmd(cmd);
     const remoteCmd = new RemoteCommand(cmd);
-    this.addToQueue(remoteCmd);
+    return this.executeCommand(remoteCmd);
   }
 
   /**
@@ -48,7 +48,7 @@ class Rocket {
   local(cmd: string) {
     cmd = this.composeCmd(cmd);
     const localCmd = new LocalCommand(cmd);
-    this.addToQueue(localCmd);
+    return this.executeCommand(localCmd);
   }
 
   /**
@@ -77,10 +77,18 @@ class Rocket {
    * @param command Command to prepend to all commands executed in the callback
    * @param callback Callback containing commands to execute
    */
-  with(command: string, callback: Function) {
-    this.prependArgs.push(command);
-    callback();
-    this.prependArgs.pop();
+   with(command: string, callback: Function): Promise<any> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        this.prependArgs.push(command);
+        const results = await callback();
+        this.prependArgs.pop();
+        resolve(results);
+      } catch (e) {
+        console.error(e);
+        reject(e);
+      }
+    });
   }
 
   /**
@@ -105,16 +113,15 @@ class Rocket {
     const targetConfig = this.targets[target];
     this.currentTarget = target;
     if (targetConfig) {
-      console.log(colors.blue.bold('Client::ready\n'));
+      console.log(colors.blue.bold('Client::ready'));
       this.connections = await this.connectionFactory.createAll(targetConfig);
     }
 
     await this.missions[mission]();
-    await this.runCommands(this.commands);
 
     if (targetConfig) {
       await this.connectionFactory.terminateAll(this.connections);
-      console.log(colors.blue.bold('Client::end'));
+      console.log(colors.blue.bold('\nClient::end'));
     }
 
     return true;
@@ -141,9 +148,7 @@ class Rocket {
   private async executeCommand(command: AbstractCommand) {
     return new Promise(async (resolve, reject) => {
       let commandExecutions: Promise<object>[] = [];
-      for (let connection of this.connections) {
-        commandExecutions.push(command.execute(connection));
-      }
+      commandExecutions.push(...command.execute(this.connections));
       await Promise.all(commandExecutions);
       resolve();
     });
