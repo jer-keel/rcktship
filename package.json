@@ -1,6 +1,6 @@
 {
   "name": "rcktship",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "A lightweight library the runs an arbitrary series of shell commands on both local and remote hosts.",
   "scripts": {
     "start": "yarn clean && yarn watch-ts",
