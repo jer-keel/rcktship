@@ -11,9 +11,13 @@ Rcktship is heavily inspired by [Fabric](http://www.fabfile.org/), which is also
 ```bash
 # Install rcktship CLI globally
 $ npm install -g rcktship
+# or
+$ yarn global add rcktship
 
 # or in your project
 $ npm install --save-dev rcktship
+# or
+$ yarn add -D rcktship
 
 # Launch your first rocketship!
 $ rocket <target> [mission] [options]
@@ -43,14 +47,14 @@ rocket.target('prod', [{
   "passphrase": "*****"
 }]);
 
-rocket.mission('default', () => {
+rocket.mission('default', async () => {
   console.log('Default mission!');
-  rocket.remote('hostname');
+  await rocket.remote('hostname');
 });
 
-rocket.mission('pwd', () => {
-  rocket.local('pwd');
-  rocket.remote('pwd');
+rocket.mission('pwd', async () => {
+  await rocket.local('pwd');
+  await rocket.remote('pwd');
 });
 ```
 
@@ -69,8 +73,8 @@ Connection objects used for targets are ConnectConfig from [SSH2](https://github
 
 ```bash
 git clone git@github.com:jerkeeler/rcktship.git
-npm install
-npm start
+yarn install
+yarn start
 ```
 
 Make any code changes, add tests, manually test your changes, then submit a pull request.
@@ -78,7 +82,7 @@ Make any code changes, add tests, manually test your changes, then submit a pull
 ## Testing
 
 ```bash
-npm test
+yarn test
 ```
 
 Rcktship uses [jest](https://facebook.github.io/jest/) to do all testing and test coverage. Along with [ts-jest](https://github.com/kulshekhar/ts-jest) for the TypeScript support.
