@@ -127,24 +127,6 @@ class Rocket {
     return true;
   }
 
-  private addToQueue(cmd: AbstractCommand) {
-    this.commands.push(cmd);
-  }
-
-  private async runCommands(commands: AbstractCommand[]): Promise<object> {
-    return new Promise(async (resolve, reject) => {
-      for (let cmd of commands) {
-        try {
-          await this.executeCommand(cmd);
-        } catch (err) {
-          console.error(colors.redBright.bold(`Failed executing command: ${cmd.cmd}`));
-          console.error(colors.redBright(err));
-        }
-      }
-      return resolve();
-    });
-  }
-
   private async executeCommand(command: AbstractCommand) {
     return new Promise(async (resolve, reject) => {
       let commandExecutions: Promise<object>[] = [];
