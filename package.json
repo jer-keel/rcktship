@@ -44,26 +44,26 @@
   },
   "homepage": "https://github.com/jerkeeler/rcktship#readme",
   "dependencies": {
-    "chalk": "^2.3.0",
-    "debug": "^3.1.0",
-    "interpret": "^1.0.4",
-    "liftoff": "^2.3.0",
+    "chalk": "^2.4.2",
+    "debug": "^4.1.1",
+    "interpret": "^1.2.0",
+    "liftoff": "^3.1.0",
     "nopt": "^4.0.1",
-    "ssh2": "^0.6.0",
-    "v8flags": "^3.0.1"
+    "ssh2": "^0.8.5",
+    "v8flags": "^3.1.3"
   },
   "devDependencies": {
-    "@types/commander": "^2.11.0",
-    "@types/debug": "0.0.30",
-    "@types/jest": "^22.2.2",
-    "@types/node": "^9.6.0",
-    "@types/ssh2": "^0.5.35",
-    "coveralls": "^3.0.0",
-    "jest": "^22.4.3",
-    "rimraf": "^2.6.2",
-    "ts-jest": "^22.4.2",
-    "tslint": "^5.8.0",
-    "typescript": "^2.6.1"
+    "@types/commander": "^2.12.2",
+    "@types/debug": "4.1.5",
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.11",
+    "@types/ssh2": "^0.5.39",
+    "coveralls": "^3.0.6",
+    "jest": "^24.9.0",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^24.1.0",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
   },
   "jest": {
     "collectCoverage": true,
