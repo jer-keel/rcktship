@@ -5,3 +5,4 @@ const rocketFactory = new RocketFactory();
 const rckt: Rocket = rocketFactory.create();
 
 export { rckt };
+export default rckt;
