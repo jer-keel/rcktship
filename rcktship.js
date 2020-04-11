@@ -20,13 +20,16 @@ rocket.mission('pwd', async () => {
 });
 
 rocket.mission('with', async () => {
-  await rocket.with('cd /app', async () => {
+  await rocket.with('cd /apps', async () => {
     await rocket.with('cd /', async () => {
-      return rocket.remote('pwd');
+      await rocket.remote('pwd');
     });
-    return rocket.remote('pwd');
+    await rocket.remote('pwd');
   });
   await rocket.remote('pwd');
+  await rocket.with('cd ./src', async () => {
+    await rocket.local('pwd');
+  });
 });
 
 rocket.mission('once', async () => {
