@@ -1,6 +1,6 @@
 {
   "name": "rcktship",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A lightweight library the runs an arbitrary series of shell commands on both local and remote hosts.",
   "scripts": {
     "start": "npm run clean && npm run watch-ts",
@@ -13,7 +13,7 @@
     "travis-test": "npm test && npm run coveralls",
     "npm-publish": "npm run clean && npm run build-ts && npm publish"
   },
-  "main": "index.js",
+  "main": "./dist/index.js",
   "bin": {
     "rocket": "./bin/rocket.js"
   },
