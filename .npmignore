@@ -6,6 +6,10 @@ config.json
 .idea
 __tests__/
 __mocks__/
+coverage/
+rcktship.js
+.travis.yml
+tsconfig.json
 
 # Dependency directory
 # https://docs.npmjs.com/cli/shrinkwrap#caveats

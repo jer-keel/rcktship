@@ -1,6 +1,6 @@
 {
   "name": "rcktship",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A lightweight library the runs an arbitrary series of shell commands on both local and remote hosts.",
   "scripts": {
     "start": "npm run clean && npm run watch-ts",
