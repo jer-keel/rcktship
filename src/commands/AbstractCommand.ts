@@ -1,6 +1,5 @@
 import { Client } from 'ssh2';
-import * as chalk from 'chalk';
-const colors = chalk.default;
+import * as colors from 'chalk';
 
 abstract class AbstractCommand {
   constructor(readonly cmd: string) { }

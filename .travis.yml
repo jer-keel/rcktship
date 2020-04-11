@@ -1,10 +1,10 @@
 language: node_js
 node_js:
   - "node"
-  - "8"
+  - "12"
 install:
-  - yarn install
+  - npm install
 script:
-  - yarn run build-ts
-  - yarn test
-  - yarn run coveralls
+  - npm run build-ts
+  - npm test
+  - npm run coveralls

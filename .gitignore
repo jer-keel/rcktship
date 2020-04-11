@@ -4,6 +4,7 @@ coverage/
 config.json
 .DS_Store
 .vscode
+.idea
 *.log
 
 # Dependency directory

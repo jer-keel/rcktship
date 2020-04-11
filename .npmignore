@@ -3,6 +3,7 @@ node_modules/
 config.json
 .DS_Store
 .vscode
+.idea
 __tests__/
 __mocks__/
 
