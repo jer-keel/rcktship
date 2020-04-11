@@ -1,7 +1,5 @@
 import { Client, ConnectConfig } from 'ssh2';
-import { readFileSync } from 'fs';
-import * as chalk from 'chalk';
-const colors = chalk.default;
+import * as colors from 'chalk';
 
 import { AbstractCommand } from './commands/AbstractCommand';
 import { LocalCommand } from './commands/LocalCommand';

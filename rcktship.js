@@ -8,7 +8,10 @@ rocket.mission('default', async () => {
   console.log('Default mission!');
   console.log(`Current target: ${rocket.currentTarget}`);
   await rocket.local('pwd');
-  await rocket.remote('hostname');
+  await Promise.all([
+    rocket.remote('hostname'),
+    rocket.remote('pwd'),
+  ]);
 });
 
 rocket.mission('pwd', async () => {

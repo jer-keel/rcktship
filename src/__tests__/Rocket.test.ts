@@ -1,7 +1,5 @@
 import { RocketFactory } from '../RocketFactory';
-import * as chalk from 'chalk';
-
-const colors = chalk.default;
+import * as colors from 'chalk';
 
 const rocketFactory = new RocketFactory();
 const rocket = rocketFactory.create();
