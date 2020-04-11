@@ -1,17 +1,17 @@
 {
   "name": "rcktship",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight library the runs an arbitrary series of shell commands on both local and remote hosts.",
   "scripts": {
-    "start": "yarn clean && yarn watch-ts",
+    "start": "npm run clean && npm run watch-ts",
     "clean": "./node_modules/.bin/rimraf dist",
     "build-ts": "./node_modules/.bin/tsc --pretty",
     "watch-ts": "./node_modules/.bin/tsc --watch --pretty",
     "test": "./node_modules/.bin/jest",
     "watch-test": "./node_modules/.bin/jest --watch",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "travis-test": "yarn test && yarn coveralls",
-    "npm-publish": "yarn clean && yarn build-ts && npm publish"
+    "travis-test": "npm test && npm run coveralls",
+    "npm-publish": "npm run clean && npm run build-ts && npm publish"
   },
   "main": "index.js",
   "bin": {
