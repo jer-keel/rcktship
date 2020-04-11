@@ -64,7 +64,7 @@ async function invoke(env) {
   if (options.config) env.configPath = options.config;
 
   require(env.configPath);
-  const rcktship = await require(env.modulePath);
+  const rcktship = await require(env.modulePath).default;
   rcktship.liftoff(target, mission).catch((err) => console.error(err));
 }
 

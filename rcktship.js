@@ -1,4 +1,4 @@
-const rocket = require('./index');
+const rocket = require('./dist/index').default;
 const config = require('./config.json');
 
 rocket.target('prod', [config.connection]);
